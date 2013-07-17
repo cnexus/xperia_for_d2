@@ -4,7 +4,7 @@ unmount("/data");
 unmount("/system");
 
 ui_print("-- Formatting system");
-format("ext4", "EMMC", "/dev/block/mmcblk0p14", "0", "/system");
+format("ext4", "EMMC", "/dev/block/mmcblk0p14");
 mount("ext4", "EMMC", "/dev/block/mmcblk0p14", "/system");
 mount("ext4", "EMMC", "/dev/block/mmcblk0p15", "/data");
 mount("ext4", "EMMC", "/dev/block/mmcblk0p17", "/cache");
@@ -108,7 +108,7 @@ set_perm_recursive(0, 2000, 0755, 0755, "/system/xbin");
 show_progress(0.1, 10);
 show_progress(0.2, 0);
 ui_print("-- Installing busybox");
-run_program("/system/xbin/busybox", "--install", "/system/xbin");
+run_program("/system/xbin/busybox", "--install", "-s", "/system/xbin");
 ui_print("-- Writing boot.img");
 package_extract_file("boot.img", "/dev/block/mmcblk0p7");
 show_progress(0.100000, 0);
